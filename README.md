@@ -40,7 +40,7 @@ Set a different WhatsApp number with:
 VITE_WHATSAPP_NUMBER=201006964936 npm run dev
 ```
 
-Use the full international number without `+`, spaces, or dashes. The product detail page shows an "Order on WhatsApp" button with a pre-filled product request message.
+Use the full international number without `+`, spaces, or dashes. The product detail page shows an "Order on WhatsApp" button with a pre-filled product request message that includes the product name, category, product code, and product image URL.
 
 ## Product photos
 

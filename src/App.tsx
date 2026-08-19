@@ -144,16 +144,30 @@ const getProductIdFromHash = () => {
   return decodeURIComponent(window.location.hash.slice(productHashPrefix.length));
 };
 
+const getProductImageShareUrl = (product: Product) => {
+  if (!product.imageUrl) {
+    return null;
+  }
+
+  try {
+    return new URL(product.imageUrl, window.location.origin).href;
+  } catch {
+    return product.imageUrl;
+  }
+};
+
 const getWhatsAppOrderUrl = (product: Product) => {
   if (!whatsappNumber) {
     return null;
   }
 
+  const productImageUrl = getProductImageShareUrl(product);
   const message = [
     "Hello Nana's Hand Crafts,",
     `I would like to order or ask about: ${product.name}`,
     `Category: ${product.category}`,
     `Product code: ${product.id}`,
+    ...(productImageUrl ? [`Product image: ${productImageUrl}`] : []),
     '',
     'My notes:',
   ].join('\n');
