@@ -389,7 +389,14 @@ function App() {
                 aria-label={`View details for ${product.name}`}
               >
                 {product.imageUrl ? (
-                  <img className="product-photo" src={product.imageUrl} alt={product.imageAlt} />
+                  <div className="product-image-frame">
+                    <span
+                      className="product-photo-backdrop"
+                      style={{ backgroundImage: `url(${product.imageUrl})` }}
+                      aria-hidden="true"
+                    />
+                    <img className="product-photo" src={product.imageUrl} alt={product.imageAlt} />
+                  </div>
                 ) : (
                   <div className="product-art" role="img" aria-label={product.imageAlt}>
                     <span>{product.category}</span>
