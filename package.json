@@ -1,0 +1,38 @@
+{
+  "name": "hand-crafts-fe",
+  "version": "1.0.0",
+  "description": "React frontend for Nana's Hand Crafts crochet brand website.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahmoud-Elhalfawy/hand-crafts-FE.git"
+  },
+  "keywords": [
+    "react",
+    "vite",
+    "crochet",
+    "handmade"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mahmoud-Elhalfawy/hand-crafts-FE/issues"
+  },
+  "homepage": "https://github.com/Mahmoud-Elhalfawy/hand-crafts-FE#readme",
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1"
+  }
+}
