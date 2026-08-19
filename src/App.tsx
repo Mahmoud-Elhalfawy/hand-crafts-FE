@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { applyTheme, getInitialTheme, type Theme } from './theme';
 
 type Product = {
   id: string;
@@ -112,28 +113,6 @@ const fallbackProducts: Product[] = [
     tags: ['hip scarf', 'belt', 'red', 'festival'],
   },
   {
-    id: 'granny-square-crop-top',
-    name: 'Granny Square Crop Top',
-    category: 'Tops',
-    description: 'A fitted crochet crop top made from granny square panels with bold contrast straps and edging.',
-    startingPrice: 'Custom quote',
-    imageUrl: '/products/granny-square-crop-top.svg',
-    imageAlt: 'Black, blue, and white granny square crochet crop top worn with a white skirt',
-    customisable: true,
-    tags: ['top', 'granny square', 'wearable', 'summer'],
-  },
-  {
-    id: 'granny-square-pouch',
-    name: 'Granny Square Drawstring Pouch',
-    category: 'Bags',
-    description: 'A soft drawstring crochet pouch with floral granny square panels and scalloped edging.',
-    startingPrice: 'Custom quote',
-    imageUrl: '/products/granny-square-pouch.svg',
-    imageAlt: 'Stack of cream granny square crochet pouches with brown, black, pink, and blue flowers',
-    customisable: true,
-    tags: ['pouch', 'bag', 'drawstring', 'granny square'],
-  },
-  {
     id: 'lace-triangle-scarf',
     name: 'Lace Triangle Crochet Scarf',
     category: 'Accessories',
@@ -155,29 +134,20 @@ const initialForm: InquiryForm = {
 };
 
 function App() {
-  const [products, setProducts] = useState<Product[]>(fallbackProducts);
+  const products = fallbackProducts;
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [form, setForm] = useState<InquiryForm>(initialForm);
   const [formStatus, setFormStatus] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
+    applyTheme(theme);
+  }, [theme]);
 
-    fetch(`${apiBaseUrl}/api/products`, { signal: controller.signal })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Unable to load products');
-        }
-        return response.json() as Promise<Product[]>;
-      })
-      .then(setProducts)
-      .catch(() => {
-        setProducts(fallbackProducts);
-      });
-
-    return () => controller.abort();
-  }, []);
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'));
+  };
 
   const categories = useMemo(
     () => ['All', ...Array.from(new Set(products.map((product) => product.category)))],
@@ -223,16 +193,32 @@ function App() {
     <main>
       <header className="site-header">
         <a className="brand-lockup" href="#top" aria-label="Nana's Hand Crafts home">
-          <span className="mini-mark" aria-hidden="true">
-            <span />
-          </span>
-          <span>Nana's Hand Crafts</span>
+          <img
+            className="brand-logo brand-logo-light"
+            src="/brand/nanas-hand-crafts-logo.jpeg"
+            alt="Nana's Hand Crafts"
+          />
+          <img
+            className="brand-logo brand-logo-dark"
+            src="/brand/nanas-hand-crafts-logo-circle.jpeg"
+            alt="Nana's Hand Crafts"
+          />
         </a>
-        <nav aria-label="Primary navigation">
-          <a href="#products">Products</a>
-          <a href="#custom">Custom orders</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <div className="header-actions">
+          <nav aria-label="Primary navigation">
+            <a href="#products">Products</a>
+            <a href="#custom">Custom orders</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <button
+            className="theme-toggle"
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
+          >
+            {theme === 'light' ? 'Dark mode' : 'Light mode'}
+          </button>
+        </div>
       </header>
 
       <section className="hero" id="top">
@@ -253,16 +239,17 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-card" aria-label="Nana's Hand Crafts logo-inspired artwork">
-          <div className="logo-ring">
-            <p>Nana's</p>
-            <div className="yarn-mark">
-              <span className="needle" />
-              <span className="yarn-ball" />
-              <span className="heart-thread" />
-            </div>
-            <p>Hand Crafts</p>
-          </div>
+        <div className="hero-card" aria-label="Nana's Hand Crafts logo">
+          <img
+            className="hero-logo hero-logo-light"
+            src="/brand/nanas-hand-crafts-logo-circle.jpeg"
+            alt="Nana's Hand Crafts circular logo"
+          />
+          <img
+            className="hero-logo hero-logo-dark"
+            src="/brand/nanas-hand-crafts-logo.jpeg"
+            alt="Nana's Hand Crafts logo"
+          />
         </div>
       </section>
 
@@ -280,7 +267,7 @@ function App() {
       <section className="products-section" id="products">
         <div className="section-heading">
           <p className="eyebrow">Starter catalog</p>
-          <h2>Pieces Nana can makes with love</h2>
+          <h2>Pieces Nana can make with love</h2>
           <p>Real photos from Nana&apos;s collection — more pieces can be added anytime.</p>
         </div>
 
