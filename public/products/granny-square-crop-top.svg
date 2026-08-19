@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Granny Square Crop Top</title>
+  <desc id="desc">Illustrated placeholder for a black, blue, and white granny square crochet crop top.</desc>
+  <rect width="1200" height="900" fill="#fffaf5"/>
+  <path d="M390 120 L390 300 M810 120 L810 300" stroke="#171717" stroke-width="58" stroke-linecap="round"/>
+  <rect x="270" y="260" width="660" height="360" rx="38" fill="#171717"/>
+  <g transform="translate(330 315)">
+    <g fill="#2d49a7">
+      <rect width="145" height="145" rx="18"/>
+      <rect x="190" width="145" height="145" rx="18"/>
+      <rect x="380" width="145" height="145" rx="18"/>
+      <rect y="175" width="145" height="145" rx="18"/>
+      <rect x="190" y="175" width="145" height="145" rx="18"/>
+      <rect x="380" y="175" width="145" height="145" rx="18"/>
+    </g>
+    <g fill="#fffaf5">
+      <circle cx="72" cy="72" r="36"/>
+      <circle cx="262" cy="72" r="36"/>
+      <circle cx="452" cy="72" r="36"/>
+      <circle cx="72" cy="247" r="36"/>
+      <circle cx="262" cy="247" r="36"/>
+      <circle cx="452" cy="247" r="36"/>
+    </g>
+  </g>
+  <text x="600" y="835" text-anchor="middle" fill="#173431" font-family="Georgia, serif" font-size="52">Granny Square Crop Top</text>
+</svg>

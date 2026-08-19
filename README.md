@@ -32,4 +32,6 @@ The site includes fallback product data so the page still renders when the API i
 
 ## Product photos
 
-The product cards currently use branded placeholders. Replace them once real product names, descriptions, pricing, and images are available.
+Product image assets live in `public/products`. The current SVG files are lightweight stand-ins so product cards load real image files immediately.
+
+To replace them with the real product photos, keep the same filenames or update each product's `imageUrl` in the frontend fallback data and backend catalog.

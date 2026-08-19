@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Lace Triangle Crochet Scarf</title>
+  <desc id="desc">Illustrated placeholder for a taupe lace triangle crochet scarf.</desc>
+  <rect width="1200" height="900" fill="#f7efe6"/>
+  <path d="M220 180 L980 180 L600 710 Z" fill="#b69b78"/>
+  <g fill="none" stroke="#fffaf5" stroke-width="18" stroke-linecap="round" opacity="0.7">
+    <path d="M300 235 C420 350 520 350 600 235 C680 350 780 350 900 235"/>
+    <path d="M350 340 C455 440 540 440 600 340 C660 440 745 440 850 340"/>
+    <path d="M410 455 C490 530 555 530 600 455 C645 530 710 530 790 455"/>
+    <path d="M500 575 C545 615 575 615 600 575 C625 615 655 615 700 575"/>
+    <circle cx="600" cy="275" r="42"/>
+    <circle cx="500" cy="405" r="38"/>
+    <circle cx="700" cy="405" r="38"/>
+  </g>
+  <path d="M220 180 L980 180 L600 710 Z" fill="none" stroke="#8f775a" stroke-width="20"/>
+  <text x="600" y="835" text-anchor="middle" fill="#173431" font-family="Georgia, serif" font-size="52">Lace Triangle Crochet Scarf</text>
+</svg>

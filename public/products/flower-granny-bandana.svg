@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Flower Granny Square Bandana</title>
+  <desc id="desc">Illustrated placeholder for a blue and white flower granny square crochet bandana.</desc>
+  <rect width="1200" height="900" fill="#fffaf5"/>
+  <path d="M220 230 L980 230 L600 705 Z" fill="#f7efe6" stroke="#173431" stroke-width="18"/>
+  <g transform="translate(330 270)">
+    <g fill="#2454b9">
+      <circle cx="90" cy="80" r="54"/>
+      <circle cx="270" cy="80" r="54"/>
+      <circle cx="450" cy="80" r="54"/>
+      <circle cx="180" cy="220" r="54"/>
+      <circle cx="360" cy="220" r="54"/>
+      <circle cx="270" cy="360" r="54"/>
+    </g>
+    <g fill="#fffaf5">
+      <circle cx="90" cy="80" r="22"/>
+      <circle cx="270" cy="80" r="22"/>
+      <circle cx="450" cy="80" r="22"/>
+      <circle cx="180" cy="220" r="22"/>
+      <circle cx="360" cy="220" r="22"/>
+      <circle cx="270" cy="360" r="22"/>
+    </g>
+  </g>
+  <text x="600" y="835" text-anchor="middle" fill="#173431" font-family="Georgia, serif" font-size="52">Flower Granny Square Bandana</text>
+</svg>

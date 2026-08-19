@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Open Stitch Crochet Bandana</title>
+  <desc id="desc">Illustrated placeholder for a red open stitch crochet bandana.</desc>
+  <rect width="1200" height="900" fill="#fbf4ec"/>
+  <path d="M230 230 C430 120 770 120 970 230 L600 690 Z" fill="#c8102e"/>
+  <g stroke="#fbf4ec" stroke-width="20" stroke-linecap="round" opacity="0.72">
+    <path d="M330 260 L600 660 L870 260"/>
+    <path d="M430 225 L600 660 L770 225"/>
+    <path d="M260 330 C450 410 750 410 940 330"/>
+    <path d="M315 420 C475 485 725 485 885 420"/>
+    <path d="M410 520 C520 565 680 565 790 520"/>
+  </g>
+  <path d="M230 230 C430 120 770 120 970 230" fill="none" stroke="#9f0d24" stroke-width="34" stroke-linecap="round"/>
+  <path d="M230 230 L115 320 M970 230 L1085 320" stroke="#c8102e" stroke-width="18" stroke-linecap="round"/>
+  <text x="600" y="835" text-anchor="middle" fill="#173431" font-family="Georgia, serif" font-size="52">Open Stitch Crochet Bandana</text>
+</svg>
