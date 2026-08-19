@@ -274,6 +274,7 @@ h3 {
 }
 
 .button.secondary {
+  background: transparent;
   border-color: var(--button-secondary-border);
   color: var(--ink);
 }

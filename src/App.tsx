@@ -22,6 +22,7 @@ type InquiryForm = {
 };
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080';
+const whatsappNumber = (import.meta.env.VITE_WHATSAPP_NUMBER ?? '+201006964936').replace(/\D/g, '');
 
 const fallbackProducts: Product[] = [
   {
@@ -143,6 +144,23 @@ const getProductIdFromHash = () => {
   return decodeURIComponent(window.location.hash.slice(productHashPrefix.length));
 };
 
+const getWhatsAppOrderUrl = (product: Product) => {
+  if (!whatsappNumber) {
+    return null;
+  }
+
+  const message = [
+    "Hello Nana's Hand Crafts,",
+    `I would like to order or ask about: ${product.name}`,
+    `Category: ${product.category}`,
+    `Product code: ${product.id}`,
+    '',
+    'My notes:',
+  ].join('\n');
+
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+};
+
 function App() {
   const products = fallbackProducts;
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
@@ -187,6 +205,8 @@ function App() {
     () => products.find((product) => product.id === selectedProductId) ?? null,
     [products, selectedProductId],
   );
+
+  const selectedProductWhatsAppUrl = selectedProduct ? getWhatsAppOrderUrl(selectedProduct) : null;
 
   const openProduct = (product: Product) => {
     setSelectedProductId(product.id);
@@ -300,12 +320,30 @@ function App() {
                 ))}
               </div>
               <div className="detail-actions">
+                {selectedProductWhatsAppUrl ? (
+                  <a
+                    className="button primary"
+                    href={selectedProductWhatsAppUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Order on WhatsApp
+                  </a>
+                ) : (
+                  <button
+                    className="button primary"
+                    type="button"
+                    onClick={() => startProductOrder(selectedProduct)}
+                  >
+                    Prepare order request
+                  </button>
+                )}
                 <button
-                  className="button primary"
+                  className="button secondary"
                   type="button"
                   onClick={() => startProductOrder(selectedProduct)}
                 >
-                  Order this item
+                  Use contact form
                 </button>
                 <a className="button secondary" href="#products">
                   Browse more products
