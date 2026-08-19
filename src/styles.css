@@ -372,6 +372,22 @@ h3 {
   overflow: hidden;
 }
 
+.product-media-button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  display: block;
+  padding: 0;
+  width: 100%;
+}
+
+.product-media-button:focus-visible,
+.text-button:focus-visible,
+.back-button:focus-visible {
+  outline: 4px solid rgb(201 143 145 / 48%);
+  outline-offset: 4px;
+}
+
 .product-art {
   align-items: end;
   background:
@@ -389,9 +405,11 @@ h3 {
 }
 
 .product-photo {
+  background: var(--cream-strong);
   display: block;
   height: 280px;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 0.65rem;
   width: 100%;
 }
 
@@ -420,6 +438,86 @@ h3 {
   font-size: 0.85rem;
   font-weight: 800;
   padding: 0.45rem 0.75rem;
+}
+
+.text-button {
+  background: transparent;
+  border: 0;
+  color: var(--blush);
+  font-weight: 900;
+  margin-top: 1.1rem;
+  padding: 0;
+}
+
+.product-detail-page {
+  background:
+    radial-gradient(circle at 78% 18%, rgb(201 143 145 / 18%), transparent 28rem),
+    var(--cream);
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 6vw, 6rem);
+}
+
+.back-button {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.product-detail-layout {
+  align-items: center;
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1fr);
+}
+
+.product-detail-media {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 2rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.product-detail-media img {
+  background: var(--cream-strong);
+  border-radius: 1.4rem;
+  display: block;
+  max-height: min(70vh, 720px);
+  object-fit: contain;
+  width: 100%;
+}
+
+.product-detail-copy > p:not(.eyebrow) {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.product-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin: 1.4rem 0 2rem;
+}
+
+.product-tags span {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+  padding: 0.5rem 0.75rem;
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
 }
 
 .custom-section {
@@ -532,6 +630,7 @@ h3 {
 @media (max-width: 980px) {
   .hero,
   .intro-section,
+  .product-detail-layout,
   .contact-section {
     grid-template-columns: 1fr;
   }

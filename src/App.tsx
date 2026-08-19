@@ -133,10 +133,21 @@ const initialForm: InquiryForm = {
   message: '',
 };
 
+const getProductIdFromHash = () => {
+  const productHashPrefix = '#product/';
+
+  if (!window.location.hash.startsWith(productHashPrefix)) {
+    return null;
+  }
+
+  return decodeURIComponent(window.location.hash.slice(productHashPrefix.length));
+};
+
 function App() {
   const products = fallbackProducts;
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(getProductIdFromHash);
   const [form, setForm] = useState<InquiryForm>(initialForm);
   const [formStatus, setFormStatus] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -148,6 +159,16 @@ function App() {
   const toggleTheme = () => {
     setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'));
   };
+
+  useEffect(() => {
+    const updateSelectedProductFromHash = () => {
+      setSelectedProductId(getProductIdFromHash());
+    };
+
+    window.addEventListener('hashchange', updateSelectedProductFromHash);
+
+    return () => window.removeEventListener('hashchange', updateSelectedProductFromHash);
+  }, []);
 
   const categories = useMemo(
     () => ['All', ...Array.from(new Set(products.map((product) => product.category)))],
@@ -161,6 +182,39 @@ function App() {
 
     return products.filter((product) => product.category === selectedCategory);
   }, [products, selectedCategory]);
+
+  const selectedProduct = useMemo(
+    () => products.find((product) => product.id === selectedProductId) ?? null,
+    [products, selectedProductId],
+  );
+
+  const openProduct = (product: Product) => {
+    setSelectedProductId(product.id);
+    window.location.hash = `product/${encodeURIComponent(product.id)}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const closeProduct = () => {
+    setSelectedProductId(null);
+    window.history.pushState(null, '', `${window.location.pathname}${window.location.search}`);
+    window.setTimeout(() => {
+      document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' });
+    }, 0);
+  };
+
+  const startProductOrder = (product: Product) => {
+    setForm((currentForm) => ({
+      ...currentForm,
+      interestedProduct: product.name,
+      message:
+        currentForm.message ||
+        `Hi Nana, I would like to order or ask about the ${product.name}.`,
+    }));
+    window.history.pushState(null, '', `${window.location.pathname}${window.location.search}#contact`);
+    window.setTimeout(() => {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }, 0);
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -220,6 +274,47 @@ function App() {
           </button>
         </div>
       </header>
+
+      {selectedProduct ? (
+        <section className="product-detail-page" aria-labelledby="product-detail-title">
+          <button className="back-button" type="button" onClick={closeProduct}>
+            Back to products
+          </button>
+          <div className="product-detail-layout">
+            <div className="product-detail-media">
+              {selectedProduct.imageUrl ? (
+                <img src={selectedProduct.imageUrl} alt={selectedProduct.imageAlt} />
+              ) : (
+                <div className="product-art" role="img" aria-label={selectedProduct.imageAlt}>
+                  <span>{selectedProduct.category}</span>
+                </div>
+              )}
+            </div>
+            <div className="product-detail-copy">
+              <p className="eyebrow">{selectedProduct.category}</p>
+              <h1 id="product-detail-title">{selectedProduct.name}</h1>
+              <p>{selectedProduct.description}</p>
+              <div className="product-tags" aria-label="Product tags">
+                {selectedProduct.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+              <div className="detail-actions">
+                <button
+                  className="button primary"
+                  type="button"
+                  onClick={() => startProductOrder(selectedProduct)}
+                >
+                  Order this item
+                </button>
+                <a className="button secondary" href="#products">
+                  Browse more products
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="hero" id="top">
         <div className="hero-copy">
@@ -287,13 +382,20 @@ function App() {
         <div className="product-grid">
           {visibleProducts.map((product) => (
             <article className="product-card" key={product.id}>
-              {product.imageUrl ? (
-                <img className="product-photo" src={product.imageUrl} alt={product.imageAlt} />
-              ) : (
-                <div className="product-art" role="img" aria-label={product.imageAlt}>
-                  <span>{product.category}</span>
-                </div>
-              )}
+              <button
+                className="product-media-button"
+                type="button"
+                onClick={() => openProduct(product)}
+                aria-label={`View details for ${product.name}`}
+              >
+                {product.imageUrl ? (
+                  <img className="product-photo" src={product.imageUrl} alt={product.imageAlt} />
+                ) : (
+                  <div className="product-art" role="img" aria-label={product.imageAlt}>
+                    <span>{product.category}</span>
+                  </div>
+                )}
+              </button>
               <div className="product-content">
                 <p className="category">{product.category}</p>
                 <h3>{product.name}</h3>
@@ -302,6 +404,9 @@ function App() {
                   <span>{product.startingPrice}</span>
                   {product.customisable ? <span>Customisable</span> : null}
                 </div>
+                <button className="text-button" type="button" onClick={() => openProduct(product)}>
+                  View details
+                </button>
               </div>
             </article>
           ))}
