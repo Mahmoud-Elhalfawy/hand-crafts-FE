@@ -6,6 +6,7 @@ type Product = {
   category: string;
   description: string;
   startingPrice: string;
+  imageUrl?: string | null;
   imageAlt: string;
   customisable: boolean;
   tags: string[];
@@ -23,34 +24,103 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080';
 
 const fallbackProducts: Product[] = [
   {
-    id: 'cozy-baby-blanket',
-    name: 'Cozy Baby Blanket',
-    category: 'Baby Gifts',
-    description: 'A soft crochet blanket made for newborn gifts, stroller walks, and nursery keepsakes.',
+    id: 'granny-square-shoulder-bag',
+    name: 'Granny Square Shoulder Bag',
+    category: 'Bags',
+    description: 'A compact crochet shoulder bag with floral granny squares, a long strap, and button detail.',
     startingPrice: 'Custom quote',
-    imageAlt: 'Folded handmade crochet baby blanket in soft neutral yarn',
+    imageUrl: null,
+    imageAlt: 'Model wearing a cream, dusty rose, and navy granny square crochet shoulder bag',
     customisable: true,
-    tags: ['blanket', 'baby', 'gift'],
+    tags: ['bag', 'granny square', 'floral', 'shoulder bag'],
   },
   {
-    id: 'amigurumi-keepsake',
-    name: 'Amigurumi Keepsake Toy',
-    category: 'Amigurumi',
-    description: 'A made-to-order crochet character or animal designed as a playful handmade keepsake.',
+    id: 'granny-square-sundress',
+    name: 'Granny Square Sundress',
+    category: 'Dresses',
+    description: 'A white sundress finished with a black and blue crochet granny square bodice.',
     startingPrice: 'Custom quote',
-    imageAlt: 'Small crochet amigurumi toy with stitched details',
+    imageUrl: null,
+    imageAlt: 'White dress with black straps and a blue, white, and black granny square crochet bodice',
     customisable: true,
-    tags: ['toy', 'custom', 'keepsake'],
+    tags: ['dress', 'granny square', 'summer', 'wearable'],
   },
   {
-    id: 'market-tote',
-    name: 'Market Tote',
+    id: 'open-stitch-bandana',
+    name: 'Open Stitch Crochet Bandana',
+    category: 'Bandanas',
+    description: 'A lightweight tie-back crochet bandana with an airy open stitch pattern and scalloped edge.',
+    startingPrice: 'Custom quote',
+    imageUrl: null,
+    imageAlt: 'Red open stitch crochet bandana worn as a hair scarf',
+    customisable: true,
+    tags: ['bandana', 'hair scarf', 'red', 'open stitch'],
+  },
+  {
+    id: 'flower-granny-bandana',
+    name: 'Flower Granny Square Bandana',
     category: 'Accessories',
-    description: 'A sturdy crochet tote for errands, yarn shopping, beach days, or everyday use.',
+    description: 'A floral granny square bandana available in bright and neutral color combinations.',
     startingPrice: 'Custom quote',
-    imageAlt: 'Reusable crochet tote bag with long handles',
+    imageUrl: null,
+    imageAlt: 'Blue and white floral granny square crochet bandana worn over loose hair',
     customisable: true,
-    tags: ['bag', 'accessory', 'reusable'],
+    tags: ['bandana', 'hair scarf', 'granny square', 'floral'],
+  },
+  {
+    id: 'multi-color-granny-bandana',
+    name: 'Multi-Color Granny Bandana',
+    category: 'Bandanas',
+    description: 'A customizable granny square bandana made in colorways like blue, pink, green, yellow, purple, brown, black, orange, and teal.',
+    startingPrice: 'Custom quote',
+    imageUrl: null,
+    imageAlt: 'Grid of granny square crochet bandanas in multiple color options',
+    customisable: true,
+    tags: ['bandana', 'custom colors', 'granny square', 'floral'],
+  },
+  {
+    id: 'tie-on-hip-scarf',
+    name: 'Tie-On Crochet Hip Scarf',
+    category: 'Wearables',
+    description: 'A triangular crochet hip scarf that ties at the waist for styling over jeans, skirts, or beachwear.',
+    startingPrice: 'Custom quote',
+    imageUrl: null,
+    imageAlt: 'Red triangular crochet hip scarf tied over black jeans',
+    customisable: true,
+    tags: ['hip scarf', 'belt', 'red', 'festival'],
+  },
+  {
+    id: 'granny-square-crop-top',
+    name: 'Granny Square Crop Top',
+    category: 'Tops',
+    description: 'A fitted crochet crop top made from granny square panels with bold contrast straps and edging.',
+    startingPrice: 'Custom quote',
+    imageUrl: null,
+    imageAlt: 'Black, blue, and white granny square crochet crop top worn with a white skirt',
+    customisable: true,
+    tags: ['top', 'granny square', 'wearable', 'summer'],
+  },
+  {
+    id: 'granny-square-pouch',
+    name: 'Granny Square Drawstring Pouch',
+    category: 'Bags',
+    description: 'A soft drawstring crochet pouch with floral granny square panels and scalloped edging.',
+    startingPrice: 'Custom quote',
+    imageUrl: null,
+    imageAlt: 'Stack of cream granny square crochet pouches with brown, black, pink, and blue flowers',
+    customisable: true,
+    tags: ['pouch', 'bag', 'drawstring', 'granny square'],
+  },
+  {
+    id: 'lace-triangle-scarf',
+    name: 'Lace Triangle Crochet Scarf',
+    category: 'Accessories',
+    description: 'A delicate open lace triangle scarf for layering around the neck or styling as a head covering.',
+    startingPrice: 'Custom quote',
+    imageUrl: null,
+    imageAlt: 'Taupe lace triangle crochet scarf styled around the neck',
+    customisable: true,
+    tags: ['scarf', 'lace', 'triangle scarf', 'neutral'],
   },
 ];
 
@@ -208,9 +278,13 @@ function App() {
         <div className="product-grid">
           {visibleProducts.map((product) => (
             <article className="product-card" key={product.id}>
-              <div className="product-art" role="img" aria-label={product.imageAlt}>
-                <span>{product.category}</span>
-              </div>
+              {product.imageUrl ? (
+                <img className="product-photo" src={product.imageUrl} alt={product.imageAlt} />
+              ) : (
+                <div className="product-art" role="img" aria-label={product.imageAlt}>
+                  <span>{product.category}</span>
+                </div>
+              )}
               <div className="product-content">
                 <p className="category">{product.category}</p>
                 <h3>{product.name}</h3>

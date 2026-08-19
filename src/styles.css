@@ -394,6 +394,13 @@ h3 {
   text-transform: uppercase;
 }
 
+.product-photo {
+  display: block;
+  height: 280px;
+  object-fit: cover;
+  width: 100%;
+}
+
 .product-content {
   padding: 1.4rem;
 }
