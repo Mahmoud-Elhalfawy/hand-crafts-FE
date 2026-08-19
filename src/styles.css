@@ -359,12 +359,14 @@ h3 {
 }
 
 .product-grid {
+  align-items: start;
   display: grid;
   gap: 1.4rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .product-card {
+  align-self: start;
   background: var(--surface);
   border: 1px solid var(--surface-border);
   border-radius: 1.6rem;
@@ -405,11 +407,8 @@ h3 {
 }
 
 .product-photo {
-  background: var(--cream-strong);
   display: block;
-  height: 280px;
-  object-fit: contain;
-  padding: 0.65rem;
+  height: auto;
   width: 100%;
 }
 
@@ -479,15 +478,12 @@ h3 {
   border-radius: 2rem;
   box-shadow: var(--shadow);
   overflow: hidden;
-  padding: clamp(0.75rem, 2vw, 1.25rem);
+  padding: 0;
 }
 
 .product-detail-media img {
-  background: var(--cream-strong);
-  border-radius: 1.4rem;
   display: block;
-  max-height: min(70vh, 720px);
-  object-fit: contain;
+  height: auto;
   width: 100%;
 }
 
