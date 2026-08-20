@@ -33,15 +33,15 @@ If deploying from the Netlify dashboard, connect this repository and select the 
 
 ## Backend API
 
-By default the frontend calls the backend at `http://localhost:8080`.
+The frontend can run without a backend because products are bundled in the app and orders go through WhatsApp.
 
-Set a different API URL with:
+If you deploy the optional Quarkus backend later, set its URL with:
 
 ```bash
 VITE_API_BASE_URL=https://your-api.example.com npm run dev
 ```
 
-The site includes fallback product data so the page still renders when the API is not running.
+Do not set `VITE_API_BASE_URL` to `localhost` on Netlify; mobile visitors cannot reach your local computer.
 
 ## WhatsApp orders
 

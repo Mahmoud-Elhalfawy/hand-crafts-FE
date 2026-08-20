@@ -21,7 +21,7 @@ type InquiryForm = {
   message: string;
 };
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? '';
 const whatsappNumber = (import.meta.env.VITE_WHATSAPP_NUMBER ?? '+201006964936').replace(/\D/g, '');
 
 const fallbackProducts: Product[] = [
@@ -256,6 +256,11 @@ function App() {
     setFormStatus('');
 
     try {
+      if (!apiBaseUrl) {
+        setFormStatus('The backend API is not configured for this deployed site yet. Please use the WhatsApp order button for now.');
+        return;
+      }
+
       const response = await fetch(`${apiBaseUrl}/api/inquiries`, {
         method: 'POST',
         headers: {
@@ -501,8 +506,8 @@ function App() {
           <p className="eyebrow">Contact Nana</p>
           <h2>Ask about a piece or request something custom.</h2>
           <p>
-            The form posts to the Quarkus backend at <code>{apiBaseUrl}</code>. Set
-            <code> VITE_API_BASE_URL</code> for deployment.
+            WhatsApp orders are available now. The contact form posts to the optional Quarkus
+            backend when <code>VITE_API_BASE_URL</code> is configured.
           </p>
         </div>
 
