@@ -31,6 +31,25 @@ Netlify settings:
 
 If deploying from the Netlify dashboard, connect this repository and select the frontend repo root.
 
+## Deploy on GitHub Pages
+
+This repo includes a GitHub Actions workflow at `.github/workflows/deploy-pages.yml`.
+
+To enable it:
+
+1. Merge these changes into `main`.
+2. In GitHub, open **Settings -> Pages**.
+3. Set **Source** to **GitHub Actions**.
+4. Push to `main` or run the **Deploy to GitHub Pages** workflow manually.
+
+The site will be available at:
+
+```text
+https://mahmoud-elhalfawy.github.io/hand-crafts-FE/
+```
+
+The Vite build automatically uses `/hand-crafts-FE/` as the asset base path when the GitHub Pages workflow runs.
+
 ## Backend API
 
 The frontend can run without a backend because products are bundled in the app and orders go through WhatsApp.

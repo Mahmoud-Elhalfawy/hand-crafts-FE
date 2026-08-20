@@ -23,6 +23,7 @@ type InquiryForm = {
 
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? '';
 const whatsappNumber = (import.meta.env.VITE_WHATSAPP_NUMBER ?? '+201006964936').replace(/\D/g, '');
+const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
 
 const fallbackProducts: Product[] = [
   {
@@ -31,7 +32,7 @@ const fallbackProducts: Product[] = [
     category: 'Bags',
     description: 'A compact crochet shoulder bag with floral granny squares, a long strap, and button detail.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/granny-square-shoulder-bag.jpg',
+    imageUrl: assetPath('/products/granny-square-shoulder-bag.jpg'),
     imageAlt: 'Model wearing a cream, dusty rose, and navy granny square crochet shoulder bag',
     customisable: true,
     tags: ['bag', 'granny square', 'floral', 'shoulder bag'],
@@ -42,7 +43,7 @@ const fallbackProducts: Product[] = [
     category: 'Dresses',
     description: 'A white sundress finished with a black and blue crochet granny square bodice.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/granny-square-sundress.jpg',
+    imageUrl: assetPath('/products/granny-square-sundress.jpg'),
     imageAlt: 'White dress with black straps and a blue, white, and black granny square crochet bodice',
     customisable: true,
     tags: ['dress', 'granny square', 'summer', 'wearable'],
@@ -53,7 +54,7 @@ const fallbackProducts: Product[] = [
     category: 'Bandanas',
     description: 'A lightweight tie-back crochet bandana with an airy open stitch pattern and scalloped edge.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/open-stitch-bandana.jpg',
+    imageUrl: assetPath('/products/open-stitch-bandana.jpg'),
     imageAlt: 'Red open stitch crochet bandana worn as a hair scarf',
     customisable: true,
     tags: ['bandana', 'hair scarf', 'red', 'open stitch'],
@@ -64,7 +65,7 @@ const fallbackProducts: Product[] = [
     category: 'Bandanas',
     description: 'The same airy open stitch bandana pattern in a bright blue colorway with scalloped edging.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/open-stitch-bandana-blue.jpg',
+    imageUrl: assetPath('/products/open-stitch-bandana-blue.jpg'),
     imageAlt: 'Blue open stitch crochet bandana worn as a hair scarf',
     customisable: true,
     tags: ['bandana', 'hair scarf', 'blue', 'open stitch'],
@@ -75,7 +76,7 @@ const fallbackProducts: Product[] = [
     category: 'Bandanas',
     description: 'A tan floral lace crochet bandana with an open motif pattern, perfect for everyday hair styling.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/floral-lace-bandana-tan.jpg',
+    imageUrl: assetPath('/products/floral-lace-bandana-tan.jpg'),
     imageAlt: 'Tan floral lace crochet bandana worn over loose hair',
     customisable: true,
     tags: ['bandana', 'hair scarf', 'tan', 'lace'],
@@ -86,7 +87,7 @@ const fallbackProducts: Product[] = [
     category: 'Accessories',
     description: 'A floral granny square bandana available in bright and neutral color combinations.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/flower-granny-bandana.jpg',
+    imageUrl: assetPath('/products/flower-granny-bandana.jpg'),
     imageAlt: 'Blue and white floral granny square crochet bandana worn over loose hair',
     customisable: true,
     tags: ['bandana', 'hair scarf', 'granny square', 'floral'],
@@ -97,7 +98,7 @@ const fallbackProducts: Product[] = [
     category: 'Bandanas',
     description: 'A customizable granny square bandana made in colorways like blue, pink, green, yellow, purple, brown, black, orange, and teal.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/multi-color-granny-bandana.jpg',
+    imageUrl: assetPath('/products/multi-color-granny-bandana.jpg'),
     imageAlt: 'Grid of granny square crochet bandanas in multiple color options',
     customisable: true,
     tags: ['bandana', 'custom colors', 'granny square', 'floral'],
@@ -108,7 +109,7 @@ const fallbackProducts: Product[] = [
     category: 'Wearables',
     description: 'A triangular crochet hip scarf that ties at the waist for styling over jeans, skirts, or beachwear.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/tie-on-hip-scarf.jpg',
+    imageUrl: assetPath('/products/tie-on-hip-scarf.jpg'),
     imageAlt: 'Red triangular crochet hip scarf tied over black jeans',
     customisable: true,
     tags: ['hip scarf', 'belt', 'red', 'festival'],
@@ -119,7 +120,7 @@ const fallbackProducts: Product[] = [
     category: 'Accessories',
     description: 'A delicate open lace triangle scarf for layering around the neck or styling as a head covering.',
     startingPrice: 'Custom quote',
-    imageUrl: '/products/lace-triangle-scarf.jpg',
+    imageUrl: assetPath('/products/lace-triangle-scarf.jpg'),
     imageAlt: 'Taupe lace triangle crochet scarf styled around the neck',
     customisable: true,
     tags: ['scarf', 'lace', 'triangle scarf', 'neutral'],
@@ -288,12 +289,12 @@ function App() {
         <a className="brand-lockup" href="#top" aria-label="Nana's Hand Crafts home">
           <img
             className="brand-logo brand-logo-light"
-            src="/brand/nanas-hand-crafts-logo.jpeg"
+            src={assetPath('/brand/nanas-hand-crafts-logo.jpeg')}
             alt="Nana's Hand Crafts"
           />
           <img
             className="brand-logo brand-logo-dark"
-            src="/brand/nanas-hand-crafts-logo-circle.jpeg"
+            src={assetPath('/brand/nanas-hand-crafts-logo-circle.jpeg')}
             alt="Nana's Hand Crafts"
           />
         </a>
@@ -394,12 +395,12 @@ function App() {
         <div className="hero-card" aria-label="Nana's Hand Crafts logo">
           <img
             className="hero-logo hero-logo-light"
-            src="/brand/nanas-hand-crafts-logo-circle.jpeg"
+            src={assetPath('/brand/nanas-hand-crafts-logo-circle.jpeg')}
             alt="Nana's Hand Crafts circular logo"
           />
           <img
             className="hero-logo hero-logo-dark"
-            src="/brand/nanas-hand-crafts-logo.jpeg"
+            src={assetPath('/brand/nanas-hand-crafts-logo.jpeg')}
             alt="Nana's Hand Crafts logo"
           />
         </div>
