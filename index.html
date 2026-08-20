@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Nana's Hand Crafts creates handmade crochet gifts, decor, accessories, and custom keepsakes."
+    />
+    <title>Nana's Hand Crafts</title>
+    <script>
+      (function () {
+        var storedTheme = localStorage.getItem('nana-theme');
+        if (storedTheme === 'light' || storedTheme === 'dark') {
+          document.documentElement.dataset.theme = storedTheme;
+          return;
+        }
+
+        document.documentElement.dataset.theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
