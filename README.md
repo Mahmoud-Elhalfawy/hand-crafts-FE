@@ -18,6 +18,19 @@ npm run dev
 
 The app runs on `http://localhost:5173`.
 
+## Deploy on Netlify
+
+This repo includes `netlify.toml`.
+
+Netlify settings:
+
+- Build command: `npm run build`
+- Publish directory: `dist`
+- SPA redirect: configured to serve `index.html`
+- WhatsApp number: `201006964936`
+
+If deploying from the Netlify dashboard, connect this repository and select the frontend repo root.
+
 ## Backend API
 
 By default the frontend calls the backend at `http://localhost:8080`.
